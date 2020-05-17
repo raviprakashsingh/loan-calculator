@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import LoanCalculatorForm from './components/LoanCalculatorForm';
+import InterestDisplay from './components/InterestDisplay';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    interestRate: 0,
+    monthlyPayment: 0,
+  };
+  setInterest = (interestRate, monthlyPayment) => {
+    this.setState({ interestRate, monthlyPayment });
+  };
+  render() {
+    return (
+      <div className='container'>
+        <h1 className='heading'>Loan Calculator</h1>
+        <LoanCalculatorForm setInterest={this.setInterest} />
+        <InterestDisplay
+          interestRate={this.state.interestRate}
+          monthlyPayment={this.state.monthlyPayment}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
